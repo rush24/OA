@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-3-16 9:58:49 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping package="edu.fjnu.oa.domain">
+    <class name="edu.fjnu.oa.domain.Privilege" table="PRIVILEGE">
+    
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        
+        <property name="url" type="java.lang.String">
+            <column name="URL" />
+        </property>
+        
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        
+        <!-- roles属性，本类与Role的多对多 -->
+        <set name="roles" table="ROLE_PRIVILEGE">
+            <key>
+                <column name="PRIVILEGE_ID" />
+            </key>
+            <many-to-many class="Role" column="ROLE_ID"/>
+        </set>
+        
+        <!-- parent属性，本类与Privilege(上级)的多对一 -->
+        <many-to-one name="parent" class="Privilege" >
+            <column name="PARENT_ID" />
+        </many-to-one>
+        
+        <!-- children属性，本类与privilege(下级)的一对多 -->
+        <set name="children" table="PRIVILEGE" lazy="false" order-by="id ASC">
+            <key>
+                <column name="USER_ID" />
+            </key>
+            <one-to-many class="Privilege" />
+        </set>
+        
+    </class>
+</hibernate-mapping>

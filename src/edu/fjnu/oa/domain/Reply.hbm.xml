@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-3-20 22:35:04 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping package="edu.fjnu.oa.domain">
+    <class name="Reply" table="REPLY">
+    
+    		<id name="id">
+    			<column name="ID"></column>
+			<generator class="native" />
+		</id>
+		<property name="title" column="TITLE"/>
+		<property name="content" type="text" length="65536" column="CONTENT"/>
+		<property name="postTime" type="timestamp" column="POST_TIME"/>
+		<property name="ipAddr" column="IPADDR"/>
+        
+        	<!-- author属性，本类与User的多对一-->
+		<many-to-one name="author" class="User" column="AUTHOR_ID"></many-to-one>
+		
+		<!-- topic属性，本类与Topic的多对一-->
+		<many-to-one name="topic" class="Topic" column="TOPIC_ID"></many-to-one>
+        
+    </class>
+</hibernate-mapping>

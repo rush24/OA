@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-3-11 14:52:14 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping package="edu.fjnu.oa.domain">
+    <class name="edu.fjnu.oa.domain.User" table="USER">
+    
+        <id name="id" type="java.lang.Long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        
+        <!-- department属性，本类与Department的多对一 -->
+        <many-to-one name="department" class="Department">
+            <column name="DEPARTMENT_ID" />
+        </many-to-one>
+        
+        <!-- roles属性，本类与Role的多对多 -->
+        <set name="roles" table="USER_ROLE" lazy="false">
+            <key column="USER_ID"></key>
+			<many-to-many class="Role" column="ROLE_ID" ></many-to-many>
+        </set>
+        
+        <property name="loginName" type="java.lang.String">
+            <column name="LOGIN_NAME" />
+        </property>
+        
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        
+        <property name="gender" type="java.lang.String">
+            <column name="GENDER" />
+        </property>
+        
+        <property name="phoneNumber" type="java.lang.String">
+            <column name="PHONE_NUMBER" />
+        </property>
+        
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

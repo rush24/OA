@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-3-20 22:35:04 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping package="edu.fjnu.oa.domain">
+    <class name="Topic" table="TOPIC">
+        
+        <id name="id">
+        		<column name="ID"></column>
+        		<generator class="native"></generator>
+        </id>
+        
+        	<property name="title" column="TITLE"/>
+		<property name="content" type="text" length="65536" column="CONTENT"/>
+		<property name="postTime" type="timestamp" column="POST_TIME"/>
+		<property name="ipAddr" column="IPADDR"/>
+        
+        	<property name="type" column="TYPE"/>     	
+        	<property name="replyCount" column="REPLY_COUNT"/>
+        <property name="lastUpdateTime" type="timestamp" column="LAST_UPDATE_TIME"/>
+        
+        <!-- author属性，本类与User的多对一 -->
+        <many-to-one name="author" class="User" column="AUTHOR_ID"></many-to-one>
+        
+        <!-- Forum属性，本类与Forum的多对一 -->
+        <many-to-one name="forum" class="Forum" column="FORUM_ID"></many-to-one>
+        
+        <!-- replies属性，本类与Reply的一对多 -->
+        <set name="replies">
+        		<key column="TOPIC_ID"></key>
+        		<one-to-many class="Reply"/>
+        </set>
+        
+        	<!-- lastReply属性，本类与Reply的一对一。
+			采用基于外键的一对一映射，本方有外键。 -->
+		<many-to-one name="lastReply" class="Reply" column="LAST_REPLY_ID" unique="true"></many-to-one>
+        
+    </class>
+</hibernate-mapping>
