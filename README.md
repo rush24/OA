@@ -12,3 +12,4 @@
 # 使用
 - 下载项目后，新建数据库，修改`jdbc.properties`数据库配置文件。
 - 执行`edu.fjnu.oa.util.Installer`类的`main`方法进行项目安装。
+test...
